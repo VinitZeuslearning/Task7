@@ -1,43 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 <style>
+    :root {
+        --root-color: #121212;
+        --drager-container-color: #1E1E2F;
+        --drager-border-color: #2C2C3A;
+        --element-color: #F5F5F5;
+        --element-border: #64FFDA;
+    }
+
+
     * {
         top: 0;
         margin: 0;
     }
-    .container {
+
+    .Root {
         height: 100vh;
         width: 100%;
-        background-color: aquamarine;
+        background: var(--root-color);
+        display: flex;
+        flex-direction: column;
+    }
+
+    .container {
         touch-action: none;
         display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        gap: 5px;
+        margin-top: 5px;
     }
-    
+
 
     .dragerContainer {
-        min-height: 200px;
-        width: 100%;
+        flex: 1 1 30%;
+        position: relative;
+        background: var(--drager-container-color);
+        /* border: 2px solid var(--drager-border-color); */
     }
 
-    .someSt { 
+    .someSt {
         border-radius: 10px;
         box-sizing: border-box;
-        border: 2px solid white;
+        border: 2px solid var(--element-border);
+        background: var(--element-color);
+        /* background-color: ; */
         position: absolute;
     }
-</style>
-<body>
-    <div class="container" id="Container">
 
+    .themeBar {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        padding: 12px 16px;
+        background: var(--themebar-color);
+        align-items: center;
+    }
+
+    .theme {
+        height: 36px;
+        width: 36px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .theme:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 8px var(--element-border);
+    }
+</style>
+
+<body>
+    <div class="Root">
+        <div class="themeBar" id="themeBar">
+        </div>
+        <div class="container" id="Container">
+        </div>
     </div>
 </body>
 
 <script src="./index.js"></script>
+
 </html>
-
-
