@@ -92,7 +92,7 @@ function applyTheme(theme) {
 
 function changeThemeHandler(e) {
     let themnumber = e.target.dataset.themeIndex;
-    console.log(`themnumber : ${themnumber}`)
+    // console.log(`themnumber : ${themnumber}`)
     applyTheme(themes[themnumber]);
 }
 function loadTheme() {
@@ -113,7 +113,7 @@ function loadTheme() {
     }
 }
 
-applyTheme(themes[2]);
+applyTheme(themes[7]);
 loadTheme()
 
 const themebarelm = document.getElementById('themBar');
@@ -147,11 +147,11 @@ function Parent() {
 
     function setChildsBoundres() {
         let rect = _this.parentElm.getBoundingClientRect();
-        console.log(`resize ,  left: ${rect.left}, top : ${rect.top}, height : ${rect.height}, width: ${rect.width} Id: ${_this.parentId}`);
+        // console.log(`resize ,  left: ${rect.left}, top : ${rect.top}, height : ${rect.height}, width: ${rect.width} Id: ${_this.parentId}`);
         _this.childsElms.forEach((childObj) => {
             childObj.setBoundries(rect.left, rect.right, rect.top, rect.bottom, rect.height, rect.width);
             // console.log('bounder set ');
-            console.log(`parentTop: ${rect.top}, parentLeft: ${rect.left}, Id: ${_this.parentId}`);
+            // console.log(`parentTop: ${rect.top}, parentLeft: ${rect.left}, Id: ${_this.parentId}`);
             childObj.changePosRelative();
         })
     }
@@ -228,13 +228,14 @@ function ChildObj() {
         let left = (valx - (rect.width / 2));
         let top = (valy - (rect.height / 2));
         _this.changePos(left, top);
-        console.log(` minx: ${minX}, maxx: ${maxX}, miny: ${minY}, maxy: ${maxY}, valx: ${valx}, valy: ${valy}, left: ${left}, top: ${top}`);
+        // console.log(` minx: ${minX}, maxx: ${maxX}, miny: ${minY}, maxy: ${maxY}, valx: ${valx}, valy: ${valy}, left: ${left}, top: ${top}`);
         // _this.changePos( x ,  y);
     }
 
     function initializeEvents() {
         _this.childElm.addEventListener('pointerdown', downhandler);
-        document.addEventListener('pointerup', uphandler);
+        // document.addEventListener('pointerup', uphandler);
+        window.addEventListener('pointerup', uphandler);
         document.addEventListener('pointermove', moveHandler);
     }
 
@@ -261,43 +262,50 @@ function ChildObj() {
     return _this
 }
 
+
+function animateRandomMovement() {
+    const elements = document.querySelectorAll('.someSt');
+
+    elements.forEach(elm => {
+        const parent = elm.parentElement;
+
+        const parentWidth = parent.clientWidth;
+        const parentHeight = parent.clientHeight;
+        const elmWidth = elm.offsetWidth;
+        const elmHeight = elm.offsetHeight;
+
+        // Random positions within parent bounds
+        const maxX = parentWidth - elmWidth;
+        const maxY = parentHeight - elmHeight;
+
+        const randomX = Math.floor(Math.random() * maxX);
+        const randomY = Math.floor(Math.random() * maxY);
+
+        // Apply smooth movement via CSS transition
+        elm.style.transition = 'all 0.3s ease';
+        elm.style.left = randomX + 'px';
+        elm.style.top = randomY + 'px';
+    });
+}
+
+// Move randomly every 1.5 seconds
+setInterval(animateRandomMovement, 1000);
+
+
 ChildObj.id = 0;
-// let elm = ChildObj();
 
-let pare = new Parent();
-let pare2 = new Parent();
-let pare3 = new Parent();
-let pare4 = new Parent();
-let pare5 = new Parent();
-let pare6 = new Parent();
+let parentCnt = 2;
+let childPerParent = 100;
 
-// pare.creatParent();
-// pare2.creatParent();
-// pare3.creatParent();
 
-let child1 = new ChildObj();
-let child2 = new ChildObj();
-let child3 = new ChildObj();
-let child4 = new ChildObj();
-let child5 = new ChildObj();
-let child6 = new ChildObj();
-let child7 = new ChildObj();
-let child8 = new ChildObj();
-let child9 = new ChildObj();
 
-pare.appendChild(child1)
-// pare.appendChild( child2 )
-
-pare2.appendChild(child2)
-pare3.appendChild(child3)
-pare3.appendChild(child4)
-pare3.appendChild(child4)
-pare3.appendChild(child4)
-pare3.appendChild(child5)
-pare3.appendChild(child6)
-pare4.appendChild(child7)
-pare5.appendChild(child8)
-pare6.appendChild(child9)
+for ( let i = 0 ; i < parentCnt; i++ ) {
+    let parent = new Parent();
+    for ( let j = 0; j < childPerParent; j++ ) {
+        let child = new ChildObj();
+        parent.appendChild(child);
+    }
+} 
 
 
 
