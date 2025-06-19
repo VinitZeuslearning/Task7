@@ -1,4 +1,5 @@
 const themes = [
+    // First one - kept as is
     {
         '--root-color': '#121212',
         '--drager-container-color': '#1E1E2F',
@@ -8,60 +9,67 @@ const themes = [
         '--themebar-color': '#1E1E2F',
         '--theme-element0-color': '#64FFDA'
     },
+    // Replaced with teal-green shade
     {
         '--root-color': '#F0F4F8',
         '--drager-container-color': '#FFFFFF',
         '--drager-border-color': '#DDE4E9',
-        '--element-color': '#E0F7FA',
-        '--element-border': '#26C6DA',
+        '--element-color': '#E0F2F1',
+        '--element-border': '#26A69A',
         '--themebar-color': '#FFFFFF',
-        '--theme-element1-color': '#26C6DA'
+        '--theme-element1-color': '#26A69A'
     },
+    // Replaced pink-orange with sunset amber
     {
-        '--root-color': 'linear-gradient(135deg, #FF6A00, #EE0979)',
-        '--drager-container-color': 'linear-gradient(135deg, #F2709C, #FF9472)',
-        '--drager-border-color': '#FF4E50',
-        '--element-color': '#FFD3A5',
-        '--element-border': '#FF6B6B',
-        '--themebar-color': 'linear-gradient(135deg, #F2709C, #FF9472)',
-        '--theme-element2-color': '#FF6B6B'
+        '--root-color': 'linear-gradient(135deg, #FFB74D, #FFA726)',
+        '--drager-container-color': 'linear-gradient(135deg, #FFE082, #FFCA28)',
+        '--drager-border-color': '#FF9800',
+        '--element-color': '#FFE0B2',
+        '--element-border': '#FB8C00',
+        '--themebar-color': 'linear-gradient(135deg, #FFE082, #FFCA28)',
+        '--theme-element2-color': '#FB8C00'
     },
+    // Replaced purple-pink with deep indigo gradient
     {
         '--root-color': '#0F0F1C',
-        '--drager-container-color': 'linear-gradient(135deg, #2F0035, #360940)',
-        '--drager-border-color': '#8C00FF',
-        '--element-color': '#360940',
-        '--element-border': '#FF00A6',
-        '--themebar-color': 'linear-gradient(135deg, #2F0035, #360940)',
-        '--theme-element3-color': '#FF00A6'
+        '--drager-container-color': 'linear-gradient(135deg, #1A237E, #283593)',
+        '--drager-border-color': '#5C6BC0',
+        '--element-color': '#303F9F',
+        '--element-border': '#7986CB',
+        '--themebar-color': 'linear-gradient(135deg, #1A237E, #283593)',
+        '--theme-element3-color': '#7986CB'
     },
+    // Replaced teal-green gradient with lime-cyan
     {
         '--root-color': '#E0F7FA',
-        '--drager-container-color': 'linear-gradient(135deg, #00C9FF, #92FE9D)',
-        '--drager-border-color': '#00BFA5',
-        '--element-color': '#C8F7DC',
-        '--element-border': '#00C9FF',
-        '--themebar-color': 'linear-gradient(135deg, #00C9FF, #92FE9D)',
-        '--theme-element4-color': '#00C9FF'
+        '--drager-container-color': 'linear-gradient(135deg, #C6FF00, #00E676)',
+        '--drager-border-color': '#00C853',
+        '--element-color': '#CCFF90',
+        '--element-border': '#69F0AE',
+        '--themebar-color': 'linear-gradient(135deg, #C6FF00, #00E676)',
+        '--theme-element4-color': '#00E676'
     },
+    // Replaced orange-pink with amber-yellow
     {
         '--root-color': '#FFF8E1',
-        '--drager-container-color': 'linear-gradient(135deg, #FFD3A5, #FD6585)',
-        '--drager-border-color': '#FF8A65',
-        '--element-color': '#FFE0B2',
-        '--element-border': '#FD6585',
-        '--themebar-color': 'linear-gradient(135deg, #FFD3A5, #FD6585)',
-        '--theme-element5-color': '#FD6585'
+        '--drager-container-color': 'linear-gradient(135deg, #FFE57F, #FFD54F)',
+        '--drager-border-color': '#FFCA28',
+        '--element-color': '#FFF59D',
+        '--element-border': '#FFC107',
+        '--themebar-color': 'linear-gradient(135deg, #FFE57F, #FFD54F)',
+        '--theme-element5-color': '#FFC107'
     },
+    // Same as above for consistency
     {
         '--root-color': '#FFF8E1',
-        '--drager-container-color': 'linear-gradient(135deg, #FFD3A5, #FD6585)',
-        '--drager-border-color': '#FF8A65',
-        '--element-color': '#FFDAB9',
-        '--element-border': '#FD6585',
-        '--themebar-color': 'linear-gradient(135deg, #FFD3A5, #FD6585)',
-        '--theme-element6-color': '#FD6585'
+        '--drager-container-color': 'linear-gradient(135deg, #FFE57F, #FFD54F)',
+        '--drager-border-color': '#FFCA28',
+        '--element-color': '#FFF59D',
+        '--element-border': '#FFC107',
+        '--themebar-color': 'linear-gradient(135deg, #FFE57F, #FFD54F)',
+        '--theme-element6-color': '#FFC107'
     },
+    // Blue one — kept as is
     {
         '--root-color': '#E3F2FD',
         '--drager-container-color': 'linear-gradient(135deg, #2196F3, #21CBF3)',
@@ -71,16 +79,18 @@ const themes = [
         '--themebar-color': 'linear-gradient(135deg, #2196F3, #21CBF3)',
         '--theme-element7-color': '#21CBF3'
     },
+    // Neutral grey theme replacement
     {
         '--root-color': '#FAFAFA',
-        '--drager-container-color': 'linear-gradient(135deg, #BDBDBD, #E0E0E0)',
-        '--drager-border-color': '#757575',
-        '--element-color': '#EEEEEE',
-        '--element-border': '#9E9E9E',
-        '--themebar-color': 'linear-gradient(135deg, #BDBDBD, #E0E0E0)',
-        '--theme-element8-color': '#9E9E9E'
+        '--drager-container-color': 'linear-gradient(135deg, #90A4AE, #CFD8DC)',
+        '--drager-border-color': '#78909C',
+        '--element-color': '#ECEFF1',
+        '--element-border': '#B0BEC5',
+        '--themebar-color': 'linear-gradient(135deg, #90A4AE, #CFD8DC)',
+        '--theme-element8-color': '#B0BEC5'
     }
 ];
+
 
 
 
@@ -246,7 +256,7 @@ function ChildObj() {
         // document.addEventListener('pointerup', uphandler);
     }
 
-    this.moveHandler = function(e) {
+    this.moveHandler = function (e) {
         if (!_this.isPointerInElm) {
             return;
         }
@@ -280,14 +290,14 @@ function animateRandomMovement() {
         const randomY = Math.floor(Math.random() * maxY);
 
         // Apply smooth movement via CSS transition
-        elm.style.transition = 'all 0.3s ease';
+        elm.style.transition = 'all 0.5s';
         elm.style.left = randomX + 'px';
         elm.style.top = randomY + 'px';
     });
 }
 
 // Move randomly every 1.5 seconds
-// setInterval(animateRandomMovement, 1000);
+setInterval(animateRandomMovement, 500);
 
 
 ChildObj.id = 0;
