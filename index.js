@@ -113,7 +113,7 @@ function loadTheme() {
     }
 }
 
-applyTheme(themes[7]);
+applyTheme(themes[0]);
 loadTheme()
 
 const themebarelm = document.getElementById('themBar');
@@ -147,7 +147,7 @@ function Parent() {
 
     function setChildsBoundres() {
         let rect = _this.parentElm.getBoundingClientRect();
-        // console.log(`resize ,  left: ${rect.left}, top : ${rect.top}, height : ${rect.height}, width: ${rect.width} Id: ${_this.parentId}`);
+        // console.log(`resize ,  left: ${rect.x}, top : ${rect.top}, height : ${rect.height}, width: ${rect.width} Id: ${_this.parentId}`);
         _this.childsElms.forEach((childObj) => {
             childObj.setBoundries(rect.left, rect.right, rect.top, rect.bottom, rect.height, rect.width);
             // console.log('bounder set ');
@@ -183,10 +183,10 @@ function ChildObj() {
         _this.childElm.style.left = '0px';
         _this.childElm.classList.add('someSt');
         _this.childElm.id = "dragableChildElm" + Id;
+        _this.childElm.draggable = false;
         ChildObj.id++;
         initializeEvents()
     }
-    this.creatChildElm();
     this.setBoundries = function (left, right, top, bottom, height, width) {
         _this.parentLeft = left;
         _this.parentRight = right;
@@ -195,17 +195,27 @@ function ChildObj() {
         _this.parentHeight = height;
         _this.parentWidth = width;
     }
-
-
     this.changePos = function (x, y) {
         // console.log(` changing x: ${x}, y : ${y}`)
         _this.childElm.style.left = x + "px";
         _this.childElm.style.top = y + "px";
     }
-
-
+    this.downhandler = function (e) {
+        console.log("down")
+        e.preventDefault();
+        _this.isPointerInElm = true;
+        window.addEventListener('pointerup', _this.uphandler);
+        window.addEventListener('pointermove', _this.moveHandler);
+    }
+    this.uphandler = function (e) {
+        console.log("up")
+        if (!_this.isPointerInElm) return;
+        _this.isPointerInElm = false;
+        window.removeEventListener('pointermove', _this.moveHandler);
+        window.removeEventListener('pointerup', _this.uphandler);
+    }
     this.changePosRelative = function () {
-        console.log("called")
+        // console.log("called")
         if ((_this.parentLeft == null) || (_this.parentRight == null) || (_this.parentTop == null) || (_this.parentBottom == null)) return;
 
         // console.log(`x: ${_this.x}, y: ${_this.y}`)
@@ -231,34 +241,22 @@ function ChildObj() {
         // console.log(` minx: ${minX}, maxx: ${maxX}, miny: ${minY}, maxy: ${maxY}, valx: ${valx}, valy: ${valy}, left: ${left}, top: ${top}`);
         // _this.changePos( x ,  y);
     }
-
     function initializeEvents() {
-        _this.childElm.addEventListener('pointerdown', downhandler);
+        _this.childElm.addEventListener('pointerdown', _this.downhandler);
         // document.addEventListener('pointerup', uphandler);
-        window.addEventListener('pointerup', uphandler);
-        document.addEventListener('pointermove', moveHandler);
     }
 
-    function moveHandler(e) {
+    this.moveHandler = function(e) {
         if (!_this.isPointerInElm) {
             return;
         }
         _this.x = e.clientX - _this.parentLeft;
         _this.y = e.clientY - _this.parentTop;
+        // console.log(`raw x and y ${e.clientX} , ${e.clientY}`)
+        // console.log(`parentLeft: ${_this.parentLeft}, Top: ${_this.parentTop}`)
         _this.changePosRelative();
     }
-
-
-    function downhandler() {
-        console.log("down")
-        _this.isPointerInElm = true;
-    }
-
-    function uphandler() {
-        console.log("up")
-        if (!_this.isPointerInElm) return;
-        _this.isPointerInElm = false;
-    }
+    this.creatChildElm();
     return _this
 }
 
@@ -289,23 +287,27 @@ function animateRandomMovement() {
 }
 
 // Move randomly every 1.5 seconds
-setInterval(animateRandomMovement, 1000);
+// setInterval(animateRandomMovement, 1000);
 
 
 ChildObj.id = 0;
 
-let parentCnt = 2;
-let childPerParent = 100;
+let parentCnt = 6;
+let childPerParent = 9;
 
 
-
-for ( let i = 0 ; i < parentCnt; i++ ) {
+let parentArr = []
+for (let i = 0; i < parentCnt; i++) {
     let parent = new Parent();
-    for ( let j = 0; j < childPerParent; j++ ) {
-        let child = new ChildObj();
-        parent.appendChild(child);
+    parentArr.push(parent);
+}
+
+
+for (let par of parentArr) {
+    for (let i = 0; i < childPerParent; i++) {
+        par.appendChild(new ChildObj());
     }
-} 
+}
 
 
 
