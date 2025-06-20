@@ -157,11 +157,8 @@ function Parent() {
 
     function setChildsBoundres() {
         let rect = _this.parentElm.getBoundingClientRect();
-        // console.log(`resize ,  left: ${rect.x}, top : ${rect.top}, height : ${rect.height}, width: ${rect.width} Id: ${_this.parentId}`);
         _this.childsElms.forEach((childObj) => {
             childObj.setBoundries(rect.left, rect.right, rect.top, rect.bottom, rect.height, rect.width);
-            // console.log('bounder set ');
-            // console.log(`parentTop: ${rect.top}, parentLeft: ${rect.left}, Id: ${_this.parentId}`);
             childObj.changePosRelative();
         })
     }
@@ -206,7 +203,6 @@ function ChildObj() {
         _this.parentWidth = width;
     }
     this.changePos = function (x, y) {
-        // console.log(` changing x: ${x}, y : ${y}`)
         _this.childElm.style.left = x + "px";
         _this.childElm.style.top = y + "px";
     }
@@ -225,15 +221,11 @@ function ChildObj() {
         window.removeEventListener('pointerup', _this.uphandler);
     }
     this.changePosRelative = function () {
-        // console.log("called")
         if ((_this.parentLeft == null) || (_this.parentRight == null) || (_this.parentTop == null) || (_this.parentBottom == null)) return;
 
-        // console.log(`x: ${_this.x}, y: ${_this.y}`)
         let x = _this.x;
         let y = _this.y;
 
-
-        // console.log( `x : ${x}, y : ${y}`)
         let rect = _this.childElm.getBoundingClientRect();
 
         const minX = 0 + (rect.width / 2);
@@ -248,12 +240,9 @@ function ChildObj() {
         let left = (valx - (rect.width / 2));
         let top = (valy - (rect.height / 2));
         _this.changePos(left, top);
-        // console.log(` minx: ${minX}, maxx: ${maxX}, miny: ${minY}, maxy: ${maxY}, valx: ${valx}, valy: ${valy}, left: ${left}, top: ${top}`);
-        // _this.changePos( x ,  y);
     }
     function initializeEvents() {
         _this.childElm.addEventListener('pointerdown', _this.downhandler);
-        // document.addEventListener('pointerup', uphandler);
     }
 
     this.moveHandler = function (e) {
@@ -262,8 +251,6 @@ function ChildObj() {
         }
         _this.x = e.clientX - _this.parentLeft;
         _this.y = e.clientY - _this.parentTop;
-        // console.log(`raw x and y ${e.clientX} , ${e.clientY}`)
-        // console.log(`parentLeft: ${_this.parentLeft}, Top: ${_this.parentTop}`)
         _this.changePosRelative();
     }
     this.creatChildElm();
@@ -281,23 +268,19 @@ function animateRandomMovement() {
         const parentHeight = parent.clientHeight;
         const elmWidth = elm.offsetWidth;
         const elmHeight = elm.offsetHeight;
-
-        // Random positions within parent bounds
         const maxX = parentWidth - elmWidth;
         const maxY = parentHeight - elmHeight;
 
         const randomX = Math.floor(Math.random() * maxX);
         const randomY = Math.floor(Math.random() * maxY);
-
-        // Apply smooth movement via CSS transition
         elm.style.transition = 'all 0.5s';
         elm.style.left = randomX + 'px';
         elm.style.top = randomY + 'px';
     });
 }
 
-// Move randomly every 1.5 seconds
-setInterval(animateRandomMovement, 500);
+// ****** uncomment this for random animatiosn ******* // 
+// setInterval(animateRandomMovement, 500);
 
 
 ChildObj.id = 0;
